@@ -42,23 +42,28 @@ async function init(): Promise<void> {
   console.log('   Device type:', layoutController.getDeviceType());
   console.log('   Touch device:', layoutController.isTouchDevice());
   
-  // Initialize visual effects
+  // Initialize visual effects - zoptymalizowane dla wydajności
   const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
   const vfxEngine = createVisualEffectsEngine();
   if (canvas) {
     vfxEngine.initialize(canvas);
     
-    // Start cyberpunk particle effects
+    // Start cyberpunk particle effects - zredukowane dla wydajności
     const deviceType = layoutController.getDeviceType();
-    const particleCount = deviceType === 'mobile' ? 50 : 100;
+    const particleCount = deviceType === 'mobile' ? 0 : 15;
     
-    vfxEngine.renderParticles({
-      count: particleCount,
-      color: '#00ffff',
-      size: 2,
-      speed: 1,
-      lifetime: 3000
-    });
+    if (particleCount > 0) {
+      // Opóźnij renderowanie o 2 sekundy
+      setTimeout(() => {
+        vfxEngine.renderParticles({
+          count: particleCount,
+          color: '#00ffff',
+          size: 1.2,
+          speed: 0.3,
+          lifetime: 5000
+        });
+      }, 2000);
+    }
     console.log('✅ Visual Effects initialized');
   }
   
