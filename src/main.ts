@@ -285,9 +285,11 @@ async function init(): Promise<void> {
 // Loading screen animation
 function initLoadingScreen() {
   const loadingScreen = document.getElementById('loading-screen');
-  const enterBtn = document.getElementById('enter-site-btn');
+  const enterBtn = document.getElementById('enter-site-btn') as HTMLElement | null;
   
   if (!loadingScreen || !enterBtn) return;
+  
+  const btn = enterBtn as HTMLElement;
   
   // DVD screensaver - przycisk jeździ po ekranie
   let x = Math.random() * (window.innerWidth - 200);
@@ -296,7 +298,7 @@ function initLoadingScreen() {
   let dy = 2.0;
   let dvdAnimId: number;
   
-  const colors = [
+  const colors: string[] = [
     'var(--color-primary)',
     'var(--color-secondary)',
     'var(--color-accent)',
@@ -307,8 +309,8 @@ function initLoadingScreen() {
   let colorIndex = 0;
   
   function dvdLoop() {
-    const btnW = enterBtn.offsetWidth;
-    const btnH = enterBtn.offsetHeight;
+    const btnW = btn.offsetWidth;
+    const btnH = btn.offsetHeight;
     const maxX = window.innerWidth - btnW;
     const maxY = window.innerHeight - btnH;
     
@@ -323,25 +325,25 @@ function initLoadingScreen() {
     
     if (bounced) {
       colorIndex = (colorIndex + 1) % colors.length;
-      enterBtn.style.borderColor = colors[colorIndex];
-      enterBtn.style.boxShadow = `0 0 20px ${colors[colorIndex]}`;
-      enterBtn.style.color = colors[colorIndex];
+      btn.style.borderColor = colors[colorIndex];
+      btn.style.boxShadow = `0 0 20px ${colors[colorIndex]}`;
+      btn.style.color = colors[colorIndex];
     }
     
-    enterBtn.style.left = x + 'px';
-    enterBtn.style.top = y + 'px';
+    btn.style.left = x + 'px';
+    btn.style.top = y + 'px';
     
     dvdAnimId = requestAnimationFrame(dvdLoop);
   }
   
   // Ustaw pozycję startową
-  enterBtn.style.left = x + 'px';
-  enterBtn.style.top = y + 'px';
-  enterBtn.style.visibility = 'visible';
+  btn.style.left = x + 'px';
+  btn.style.top = y + 'px';
+  btn.style.visibility = 'visible';
   dvdLoop();
   
   // Obsługa przycisku wejścia
-  enterBtn.addEventListener('click', async () => {
+  btn.addEventListener('click', async () => {
     cancelAnimationFrame(dvdAnimId);
     
     // Ukryj loading screen
