@@ -595,8 +595,31 @@ body.bloody-theme .gallery-item::after {
   animation: none !important;
 }
 
-/* Anime rating card ::after border gradient */
-body.bloody-theme .anime-rating-card::after {
+/* Lightbox */
+body.bloody-theme .lightbox-image {
+  border-color: #ff0000 !important;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.5) !important;
+  animation: none !important;
+}
+
+body.bloody-theme .lightbox-overlay {
+  background: rgba(0, 0, 0, 0.97) !important;
+  animation: none !important;
+}
+
+body.bloody-theme .lightbox-caption {
+  background: rgba(10, 0, 0, 0.95) !important;
+  border-color: #ff0000 !important;
+}
+
+body.bloody-theme .lightbox-title {
+  color: #ff0000 !important;
+}
+
+body.bloody-theme .lightbox-close:hover {
+  color: #ff0000 !important;
+  text-shadow: 0 0 20px #ff0000 !important;
+}
   opacity: 0 !important;
   animation: none !important;
 }
