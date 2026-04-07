@@ -387,7 +387,7 @@ if (document.readyState === 'loading') {
   init();
 }
 
-// Ghost AI Assistant
+// Ghost AI Assistant - Beebub
 function initGhostAssistant(): void {
   const ghost = document.getElementById('ghost-assistant');
   const ghostImg = document.getElementById('ghost-img');
@@ -402,7 +402,6 @@ function initGhostAssistant(): void {
   const msgs = messages as HTMLElement;
   const g = ghost as HTMLElement;
 
-  // DVD-style wandering
   let x = 32;
   let y = window.innerHeight - 100;
   let dx = 0.6;
@@ -411,8 +410,7 @@ function initGhostAssistant(): void {
 
   function wander(): void {
     if (isOpen) { requestAnimationFrame(wander); return; }
-    x += dx;
-    y += dy;
+    x += dx; y += dy;
     const maxX = window.innerWidth - 80;
     const maxY = window.innerHeight - 80;
     if (x <= 0 || x >= maxX) dx = -dx;
@@ -437,24 +435,6 @@ function initGhostAssistant(): void {
     chat.classList.remove('open');
   });
 
-  const responses: Record<string, string> = {
-    'kim jesteś': 'Jestem duszkiem tej strony! 👻 Strzegę portfolio ten_rogera.',
-    'kto to roger': 'Roger to wizjoner, filantrop, gracz i uczeń. Twórca tej strony!',
-    'co tu jest': 'To portfolio ten_rogera - znajdziesz tu projekty, ulubione anime i kontakt.',
-    'anime': 'Roger lubi Darling in the FRANXX, Death Note, Solo Leveling i wiele innych!',
-    'projekty': 'Sprawdź sekcję Projekty - są tam strony o transporcie kolejowym, biotechnologii i Fibonaccim.',
-    'kontakt': 'Napisz na totenroger2115@gmail.com albo znajdź go na GitHubie jako roger2115.',
-    'discord': 'Jego Discord to ten_roger.',
-    'github': 'github.com/roger2115',
-    'muzyka': 'Roger słucha Chivasa i innych artystów - sprawdź widget Spotify na stronie!',
-    'steam': 'Jego profil Steam to ten_roger - gra w różne gry.',
-    'cześć': 'Cześć! 👋 Jak mogę pomóc?',
-    'hej': 'Hej! 👻 O co chcesz zapytać?',
-    'siema': 'Siema! Pytaj śmiało!',
-    'dzięki': 'Nie ma za co! 😄',
-    'pa': 'Pa pa! 👻',
-  };
-
   function addMsg(text: string, isUser: boolean): void {
     const div = document.createElement('div');
     div.className = `ghost-msg ${isUser ? 'ghost-msg-user' : 'ghost-msg-bot'}`;
@@ -463,12 +443,38 @@ function initGhostAssistant(): void {
     msgs.scrollTop = msgs.scrollHeight;
   }
 
-  function getResponse(q: string): string {
-    const lower = q.toLowerCase().trim();
-    for (const [key, val] of Object.entries(responses)) {
-      if (lower.includes(key)) return val;
+  const history: { role: string; content: string }[] = [];
+
+  async function getAIResponse(userMsg: string): Promise<string> {
+    history.push({ role: 'user', content: userMsg });
+    try {
+      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer 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',
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://tenroger.pl',
+          'X-Title': 'Beebub - ten_roger portfolio'
+        },
+        body: JSON.stringify({
+          model: 'meta-llama/llama-3.1-8b-instruct:free',
+          messages: [
+            {
+              role: 'system',
+              content: 'Jesteś Beebub - przyjazny duszek asystent na portfolio stronie ten_rogera. Odpowiadasz po polsku, krótko i z humorem. Wiesz że ta strona należy do Rogera - gracza, który lubi anime (Darling in the FRANXX, Death Note, Solo Leveling), programuje dla zabawy i jest uczniem. Jego kontakt: totenroger2115@gmail.com, github: roger2115, discord: ten_roger.'
+            },
+            ...history
+          ],
+          max_tokens: 200
+        })
+      });
+      const data = await res.json() as { choices?: { message?: { content?: string } }[] };
+      const reply = data.choices?.[0]?.message?.content ?? 'Ups, coś poszło nie tak 👻';
+      history.push({ role: 'assistant', content: reply });
+      return reply;
+    } catch {
+      return 'Nie mogę się połączyć 👻 Spróbuj później!';
     }
-    return 'Hmm, nie wiem 🤔 Spróbuj zapytać o Rogera, projekty, anime, kontakt lub Steam!';
   }
 
   function handleSend(): void {
@@ -481,10 +487,13 @@ function initGhostAssistant(): void {
     typing.textContent = '...';
     msgs.appendChild(typing);
     msgs.scrollTop = msgs.scrollHeight;
-    setTimeout(() => {
+    getAIResponse(text).then(reply => {
       typing.remove();
-      addMsg(getResponse(text), false);
-    }, 600);
+      addMsg(reply, false);
+    }).catch(() => {
+      typing.remove();
+      addMsg('Błąd połączenia 👻', false);
+    });
   }
 
   sendBtn.addEventListener('click', handleSend);
