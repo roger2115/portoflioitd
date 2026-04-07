@@ -512,7 +512,7 @@ function initGhostAssistant(): void {
       const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'Authorization': 'Bearer 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',
+          'Authorization': 'Bearer __OPENROUTER_KEY__',
           'Content-Type': 'application/json',
           'HTTP-Referer': 'https://tenroger.pl',
           'X-Title': 'Beebub - ten_roger portfolio'
