@@ -1,0 +1,21 @@
+{
+  "name": "anime-cyberpunk-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "jsdom": "^29.0.1",
+    "terser": "^5.46.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8",
+    "vitest": "^1.0.4"
+  }
+}

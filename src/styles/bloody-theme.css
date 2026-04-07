@@ -1,0 +1,732 @@
+/* ============================================
+   BLOODY THEME - PROFESJONALNY I ZOPTYMALIZOWANY
+   ============================================ */
+
+/* === PODSTAWOWE KOLORY === */
+body.bloody-theme {
+  --color-primary: #ff0000 !important;
+  --color-secondary: #8b0000 !important;
+  --color-accent: #ff4444 !important;
+  --color-neon-glow: #ff0000 !important;
+  --color-text: #ffffff !important;
+  --color-text-secondary: #ffcccc !important;
+  background: #000000 !important;
+}
+
+/* === UKRYJ ANIME, POKAŻ BLOODY === */
+body.bloody-theme .global-anime-scenes,
+body.bloody-theme .anime-scenes-bg,
+body.bloody-theme .anime-scene,
+body.bloody-theme .anime-ratings-grid {
+  display: none !important;
+}
+
+body.bloody-theme .global-bloody-scenes {
+  display: block !important;
+  opacity: 0.06 !important;
+}
+
+body.bloody-theme .global-bloody-scene {
+  opacity: 0.06 !important;
+  animation: none !important;
+  filter: blur(1px) !important;
+}
+
+body.bloody-theme .bloody-ratings-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+/* === NAWIGACJA === */
+body.bloody-theme nav {
+  background: rgba(10, 0, 0, 0.98) !important;
+  border-bottom: 3px solid #ff0000 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3) !important;
+}
+
+body.bloody-theme .logo,
+body.bloody-theme .logo-text {
+  color: #ff0000 !important;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+body.bloody-theme .nav-link {
+  color: #ff4444 !important;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.bloody-theme .nav-link:hover,
+body.bloody-theme .nav-link:focus {
+  color: #ff0000 !important;
+  outline: none !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+  text-shadow: 0 0 10px #ff0000 !important;
+}
+
+body.bloody-theme .nav-link.active {
+  color: #ff0000 !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3) !important;
+}
+
+body.bloody-theme .nav-link::before {
+  background: #ff0000 !important;
+  box-shadow: 0 0 10px #ff0000 !important;
+}
+
+/* === PRZYCISKI === */
+body.bloody-theme .btn,
+body.bloody-theme .filter-btn,
+body.bloody-theme .theme-toggle-btn-nav,
+body.bloody-theme button {
+  background: rgba(255, 0, 0, 0.3) !important;
+  border: 2px solid #ff0000 !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease !important;
+  box-shadow: none !important;
+}
+
+body.bloody-theme .btn:hover,
+body.bloody-theme .filter-btn:hover,
+body.bloody-theme button:hover {
+  background: rgba(255, 0, 0, 0.6) !important;
+  border-color: #ff4444 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6) !important;
+  color: #ffffff !important;
+}
+
+body.bloody-theme .btn:focus,
+body.bloody-theme .filter-btn:focus,
+body.bloody-theme button:focus,
+body.bloody-theme *:focus-visible {
+  outline: 2px solid #ff0000 !important;
+  outline-offset: 2px !important;
+  border-color: #ff0000 !important;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6) !important;
+}
+
+body.bloody-theme .filter-btn.active {
+  background: rgba(255, 0, 0, 0.8) !important;
+  border-color: #ff0000 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6) !important;
+  color: #ffffff !important;
+}
+
+body.bloody-theme .btn-glow {
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.5) 0%, transparent 70%) !important;
+}
+
+/* === KARTY - BEZ MRYGANIA, BEZ NIEBIESKIEGO === */
+body.bloody-theme .anime-rating-card,
+body.bloody-theme .skill-card,
+body.bloody-theme .gallery-item,
+body.bloody-theme .contact-item {
+  background: rgba(26, 0, 0, 0.95) !important;
+  border: 3px solid #ff0000 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* Wyłącz ::after animację która niszczy karty */
+body.bloody-theme .anime-rating-card::after,
+body.bloody-theme .skill-card::after,
+body.bloody-theme .contact-item::after,
+body.bloody-theme .gallery-item::after {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+body.bloody-theme .anime-rating-card:hover::after,
+body.bloody-theme .skill-card:hover::after,
+body.bloody-theme .contact-item:hover::after,
+body.bloody-theme .gallery-item:hover::after {
+  opacity: 0 !important;
+}
+
+/* Wyłącz ::before shimmer z niebieskim */
+body.bloody-theme .anime-rating-card::before,
+body.bloody-theme .skill-card::before,
+body.bloody-theme .contact-item::before {
+  background: linear-gradient(45deg, transparent, rgba(255, 0, 0, 0.15), transparent) !important;
+  animation: none !important;
+}
+
+body.bloody-theme .anime-rating-card:hover,
+body.bloody-theme .skill-card:hover,
+body.bloody-theme .gallery-item:hover,
+body.bloody-theme .contact-item:hover {
+  border-color: #ff4444 !important;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.8), 0 8px 20px rgba(0, 0, 0, 0.5) !important;
+  transform: translateY(-5px) !important;
+  animation: none !important;
+}
+
+body.bloody-theme .contact-item:focus,
+body.bloody-theme .contact-item:focus-visible {
+  outline: 2px solid #ff0000 !important;
+  border-color: #ff0000 !important;
+}
+
+/* === TYTUŁY === */
+body.bloody-theme h1,
+body.bloody-theme h2,
+body.bloody-theme .section-title,
+body.bloody-theme .hero-title {
+  color: #ff0000 !important;
+  font-family: 'Orbitron', 'Arial Black', sans-serif !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-shadow: 
+    0 0 20px rgba(255, 0, 0, 0.8),
+    0 0 40px rgba(255, 0, 0, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+body.bloody-theme h3,
+body.bloody-theme h4 {
+  color: #ff0000 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* === WYŁĄCZENIE CIĘŻKICH ANIMACJI DLA WYDAJNOŚCI === */
+/* Wyłącz floating/pulsing - ale NIE popIn/fadeInUp bo karty będą niewidoczne */
+
+body.bloody-theme .skill-icon,
+body.bloody-theme .contact-icon {
+  animation: none !important;
+}
+
+body.bloody-theme .section-title,
+body.bloody-theme .anime-ratings-title {
+  animation: none !important;
+}
+
+body.bloody-theme .skill-progress {
+  animation: progressLoad 1.5s ease-out !important;
+}
+
+body.bloody-theme .star {
+  animation: none !important;
+}
+
+body.bloody-theme .btn-primary {
+  animation: none !important;
+}
+
+body.bloody-theme .logo {
+  animation: none !important;
+}
+
+body.bloody-theme .title-bracket {
+  animation: none !important;
+}
+
+body.bloody-theme .anime-showcase {
+  animation: none !important;
+}
+
+/* Karty - wyłącz tylko cardFloat/galleryFloat, zachowaj popIn i fadeInUp */
+body.bloody-theme .skill-card {
+  animation: none !important;
+}
+
+body.bloody-theme .gallery-item {
+  animation: none !important;
+}
+
+/* Przywróć animacje wejścia dla kart */
+body.bloody-theme .section.visible .skill-card,
+body.bloody-theme .section.visible .gallery-item,
+body.bloody-theme .section.visible .contact-item {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+/* Wszystkie popup-card i karty - zawsze widoczne */
+body.bloody-theme .popup-card,
+body.bloody-theme .anime-rating-card,
+body.bloody-theme .skill-card,
+body.bloody-theme .gallery-item,
+body.bloody-theme .contact-item {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Sekcje - zawsze widoczne w bloody-theme */
+body.bloody-theme .section {
+  opacity: 1 !important;
+  transform: none !important;
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
+}
+
+body.bloody-theme .section .hero-content,
+body.bloody-theme .section .hero-visual,
+body.bloody-theme .section .skill-card,
+body.bloody-theme .section .gallery-item,
+body.bloody-theme .section .anime-card,
+body.bloody-theme .section .contact-item {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+body.bloody-theme .anime-section {
+  padding: 4rem 2rem;
+}
+
+body.bloody-theme .anime-ratings-section {
+  margin-top: 3rem;
+  padding: 3rem 2rem;
+  background: rgba(10, 0, 0, 0.5);
+  border-radius: 16px;
+  border: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+body.bloody-theme .anime-ratings-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+body.bloody-theme .anime-ratings-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ff0000, transparent);
+}
+
+/* === SPOTIFY WIDGET === */
+body.bloody-theme .spotify-widget-section {
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: rgba(10, 0, 0, 0.85) !important;
+  border: 3px solid #ff0000 !important;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 40px rgba(255, 0, 0, 0.6),
+    inset 0 0 60px rgba(255, 0, 0, 0.1) !important;
+  transition: all 0.3s ease;
+}
+
+body.bloody-theme .spotify-widget-section:hover {
+  box-shadow: 
+    0 0 60px rgba(255, 0, 0, 0.9),
+    inset 0 0 80px rgba(255, 0, 0, 0.15) !important;
+  border-color: #ff4444 !important;
+}
+
+body.bloody-theme .spotify-title {
+  color: #ff0000 !important;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+body.bloody-theme .spotify-embed-container {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #ff0000 !important;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.4) !important;
+  background: rgba(5, 0, 0, 0.5) !important;
+  filter: none !important;
+}
+
+body.bloody-theme .spotify-embed-container:hover {
+  box-shadow: 0 0 50px rgba(255, 0, 0, 0.7) !important;
+  transform: none !important;
+}
+
+/* === STEAM WIDGET === */
+body.bloody-theme .steam-widget {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: rgba(10, 0, 0, 0.85) !important;
+  border: 3px solid #ff0000 !important;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 40px rgba(255, 0, 0, 0.6),
+    inset 0 0 60px rgba(255, 0, 0, 0.1) !important;
+  transition: all 0.3s ease;
+}
+
+body.bloody-theme .steam-widget:hover {
+  box-shadow: 
+    0 0 60px rgba(255, 0, 0, 0.9),
+    inset 0 0 80px rgba(255, 0, 0, 0.15) !important;
+  border-color: #ff4444 !important;
+}
+
+body.bloody-theme .steam-title {
+  color: #ff0000 !important;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+body.bloody-theme .steam-widget-container {
+  border: 2px solid #ff0000 !important;
+  background: rgba(5, 0, 0, 0.9) !important;
+  box-shadow: none !important;
+}
+
+body.bloody-theme .steam-widget-img {
+  border-radius: 8px;
+  /* Filtr żeby zmienić niebieski Steam na czerwony */
+  filter: hue-rotate(150deg) saturate(1.8) brightness(0.9);
+}
+
+/* === HERO SECTION === */
+body.bloody-theme .anime-video-container {
+  display: none !important;
+}
+
+body.bloody-theme .hero-visual {
+  background: rgba(5, 0, 0, 0.95) !important;
+  border: 3px solid #ff0000 !important;
+  min-height: 400px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* === BLOODY HERO GIFS === */
+.bloody-hero-gifs {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+body.bloody-theme .bloody-hero-gifs {
+  display: block !important;
+}
+
+.bloody-hero-gif {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  filter: brightness(0.8) contrast(1.2);
+}
+
+.bloody-hero-gif.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* === FORMULARZE === */
+body.bloody-theme .contact-form-wrapper {
+  background: rgba(10, 0, 0, 0.95) !important;
+  border: 2px solid #ff0000 !important;
+}
+
+body.bloody-theme .contact-form input,
+body.bloody-theme .contact-form textarea,
+body.bloody-theme input,
+body.bloody-theme textarea {
+  background: rgba(5, 0, 0, 0.9) !important;
+  border: 2px solid #ff0000 !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease;
+}
+
+body.bloody-theme .contact-form input:focus,
+body.bloody-theme .contact-form textarea:focus,
+body.bloody-theme input:focus,
+body.bloody-theme textarea:focus {
+  outline: 2px solid #ff0000 !important;
+  border-color: #ff4444 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5) !important;
+}
+
+body.bloody-theme .contact-form input::placeholder,
+body.bloody-theme .contact-form textarea::placeholder {
+  color: rgba(255, 68, 68, 0.6) !important;
+}
+
+/* === INNE ELEMENTY === */
+body.bloody-theme .star.filled {
+  color: #ff0000 !important;
+}
+
+body.bloody-theme .skill-progress {
+  background: linear-gradient(90deg, #ff0000, #8b0000) !important;
+}
+
+/* Ikony SVG - nadpisanie niebieskiego fill */
+body.bloody-theme .skill-icon,
+body.bloody-theme .skill-icon svg,
+body.bloody-theme .contact-icon,
+body.bloody-theme .contact-icon svg {
+  color: #ff0000 !important;
+  fill: #ff0000 !important;
+  filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)) !important;
+}
+
+body.bloody-theme a {
+  color: #ff4444 !important;
+  transition: color 0.3s ease;
+}
+
+body.bloody-theme a:hover,
+body.bloody-theme a:focus {
+  color: #ff0000 !important;
+  outline: none !important;
+}
+
+body.bloody-theme .hero-subtitle,
+body.bloody-theme .typing-text {
+  color: #ff4444 !important;
+}
+
+body.bloody-theme .cursor {
+  color: #ff0000 !important;
+}
+
+/* === ZAZNACZENIE TEKSTU === */
+body.bloody-theme ::selection {
+  background: rgba(255, 0, 0, 0.4) !important;
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+body.bloody-theme ::-moz-selection {
+  background: rgba(255, 0, 0, 0.4) !important;
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+/* === PRZEJŚCIE === */
+body.theme-transitioning::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 99999;
+  animation: fadeInOut 3s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeInOut {
+  0%   { opacity: 0; }
+  25%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* === CZCIONKI === */
+body.bloody-theme .btn,
+body.bloody-theme button,
+body.bloody-theme .nav-link {
+  font-family: 'Rajdhani', sans-serif !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+body.bloody-theme p,
+body.bloody-theme li,
+body.bloody-theme .rating-comment,
+body.bloody-theme .hero-description,
+body.bloody-theme .contact-details,
+body.bloody-theme .section-description {
+  font-family: 'Rajdhani', sans-serif !important;
+  letter-spacing: 0.01em;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #ffffff !important;
+}
+/* === NADPISANIA WSZYSTKICH NIEBIESKICH KOLORÓW === */
+
+/* Shimmer/before pseudo-elementy - nadpisanie niebieskiego */
+body.bloody-theme .skill-card::before,
+body.bloody-theme .anime-card::before,
+body.bloody-theme .contact-item::before {
+  background: linear-gradient(45deg, transparent, rgba(255, 0, 0, 0.15), transparent) !important;
+  animation: none !important;
+}
+
+body.bloody-theme .skill-card::after,
+body.bloody-theme .contact-item::after {
+  display: none !important;
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+body.bloody-theme .anime-card:hover::before {
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 0, 0, 0.3) 50%,
+    transparent 70%
+  ) !important;
+}
+
+/* Gallery item pseudo-elementy */
+body.bloody-theme .gallery-item::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 0, 0, 0.3) 50%, transparent 100%) !important;
+}
+
+body.bloody-theme .gallery-item::after {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+/* Anime rating card ::after border gradient */
+body.bloody-theme .anime-rating-card::after {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+/* Anime card hover */
+body.bloody-theme .anime-card:hover {
+  box-shadow: 0 25px 70px rgba(255, 0, 0, 0.7) !important;
+  border-color: #ff4444 !important;
+}
+
+body.bloody-theme .anime-rating-card:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.8), 0 8px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Loading screen */
+body.bloody-theme .loading-bar-container {
+  background: rgba(255, 0, 0, 0.2) !important;
+}
+
+body.bloody-theme .enter-site-btn {
+  background: rgba(255, 0, 0, 0.3) !important;
+  border-color: #ff0000 !important;
+}
+
+body.bloody-theme .enter-site-btn:hover {
+  background: rgba(255, 0, 0, 0.6) !important;
+  box-shadow: 0 0 30px #ff0000 !important;
+}
+
+/* Hero section */
+body.bloody-theme .anime-showcase {
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5) !important;
+  border-color: #ff0000 !important;
+}
+
+/* Skills */
+body.bloody-theme .skill-card:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.8), 0 8px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.bloody-theme .skill-bar {
+  background: rgba(255, 0, 0, 0.1) !important;
+}
+
+/* Gallery */
+body.bloody-theme .gallery-item:hover {
+  box-shadow: 0 25px 70px rgba(255, 0, 0, 0.8) !important;
+}
+
+/* Contact */
+body.bloody-theme .contact-item:hover {
+  box-shadow: 0 10px 40px rgba(255, 0, 0, 0.6) !important;
+}
+
+body.bloody-theme .form-group input:focus,
+body.bloody-theme .form-group textarea:focus {
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Footer */
+body.bloody-theme footer {
+  background: rgba(5, 0, 0, 0.98) !important;
+  border-top: 3px solid #ff0000 !important;
+}
+
+body.bloody-theme .footer-bottom {
+  border-top: 1px solid rgba(255, 0, 0, 0.2) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Profile image */
+body.bloody-theme .profile-image {
+  border-color: #ff0000 !important;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.5) !important;
+}
+
+/* Cyber grid */
+body.bloody-theme .cyber-grid {
+  background-image: 
+    linear-gradient(rgba(255, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.05) 1px, transparent 1px) !important;
+}
+
+/* Btn-primary hardcoded niebieski box-shadow */
+body.bloody-theme .btn-primary {
+  background: rgba(255, 0, 0, 0.8) !important;
+  border-color: #ff0000 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5) !important;
+  animation: none !important;
+}
+
+body.bloody-theme .btn-primary:hover {
+  box-shadow: 0 0 40px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 0.8) !important;
+}
+
+body.bloody-theme .btn-secondary {
+  color: #ff4444 !important;
+  border-color: #ff0000 !important;
+  background: transparent !important;
+}
+
+body.bloody-theme .btn-secondary:hover {
+  background: rgba(255, 0, 0, 0.1) !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Form focus hardcoded niebieski */
+body.bloody-theme .form-group input:focus,
+body.bloody-theme .form-group textarea:focus {
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5) !important;
+  border-color: #ff4444 !important;
+}
+
+/* Anime showcase border */
+body.bloody-theme .anime-showcase {
+  border-color: #ff0000 !important;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5) !important;
+  animation: none !important;
+}
+
+/* Gallery link */
+body.bloody-theme .gallery-link {
+  color: #ff4444 !important;
+  border-color: #ff0000 !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+}
+
+body.bloody-theme .gallery-link:hover {
+  background: #ff0000 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 15px #ff0000 !important;
+}
