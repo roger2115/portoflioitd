@@ -7,7 +7,6 @@ build/
 
 # Large media files (too big for GitHub)
 assets/videos/
-assets/audio/
 
 # Environment variables
 .env
