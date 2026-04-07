@@ -513,7 +513,7 @@ function initGhostAssistant(): void {
           'X-Title': 'Beebub - ten_roger portfolio'
         },
         body: JSON.stringify({
-          model: 'meta-llama/llama-3.1-8b-instruct:free',
+          model: 'google/gemma-4-26b-a4b-it:free',
           messages: [
             {
               role: 'system',
@@ -524,11 +524,17 @@ function initGhostAssistant(): void {
           max_tokens: 200
         })
       });
+      if (!res.ok) {
+        const err = await res.text();
+        console.error('OpenRouter error:', res.status, err);
+        return `Błąd API (${res.status}) 👻`;
+      }
       const data = await res.json() as { choices?: { message?: { content?: string } }[] };
-      const reply = data.choices?.[0]?.message?.content ?? 'Ups, coś poszło nie tak 👻';
+      const reply = data.choices?.[0]?.message?.content?.trim() ?? 'Ups, brak odpowiedzi 👻';
       history.push({ role: 'assistant', content: reply });
       return reply;
-    } catch {
+    } catch (e) {
+      console.error('Fetch error:', e);
       return 'Nie mogę się połączyć 👻 Spróbuj później!';
     }
   }
