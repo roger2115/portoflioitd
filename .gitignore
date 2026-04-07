@@ -6,9 +6,6 @@ dist/
 build/
 
 # Large media files (too big for GitHub)
-assets/videos/battlebeast.mp4
-assets/videos/markvariants.mp4
-assets/videos/omniman.mp4
 assets/
 
 # Environment variables
