@@ -494,6 +494,12 @@ body.bloody-theme a:focus {
   outline: none !important;
 }
 
+/* Linki w contact-details - taki sam kolor jak tekst */
+body.bloody-theme .contact-details a,
+body.bloody-theme .contact-details p {
+  color: #ffffff !important;
+}
+
 body.bloody-theme .hero-subtitle,
 body.bloody-theme .typing-text {
   color: #ff4444 !important;
