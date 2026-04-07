@@ -8,8 +8,6 @@ build/
 # Large media files (too big for GitHub)
 assets/videos/
 assets/audio/
-assets/images/
-Zerotwo.jpg
 
 # Environment variables
 .env
