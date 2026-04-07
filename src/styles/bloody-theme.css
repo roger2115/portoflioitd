@@ -620,6 +620,9 @@ body.bloody-theme .lightbox-close:hover {
   color: #ff0000 !important;
   text-shadow: 0 0 20px #ff0000 !important;
 }
+
+/* Anime rating card ::after */
+body.bloody-theme .anime-rating-card::after {
   opacity: 0 !important;
   animation: none !important;
 }
