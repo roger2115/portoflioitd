@@ -408,10 +408,9 @@ function initGhostAssistant(): void {
   let dx = 0.6;
   let dy = 0.4;
   let isOpen = false;
-  let _animId: number;
 
   function wander(): void {
-    if (isOpen) { _animId = requestAnimationFrame(wander); return; }
+    if (isOpen) { requestAnimationFrame(wander); return; }
     x += dx;
     y += dy;
     const maxX = window.innerWidth - 80;
@@ -423,7 +422,7 @@ function initGhostAssistant(): void {
     g.style.left = x + 'px';
     g.style.bottom = 'auto';
     g.style.top = y + 'px';
-    _animId = requestAnimationFrame(wander);
+    requestAnimationFrame(wander);
   }
   wander();
 
