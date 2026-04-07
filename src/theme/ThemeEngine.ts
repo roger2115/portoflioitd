@@ -67,7 +67,7 @@ export class DefaultThemeEngine implements ThemeEngine {
     // Sans-serif for body text
     this.setCSSVariable('--font-body', "'Inter', 'Roboto', sans-serif");
     // Stylized fonts for headings
-    this.setCSSVariable('--font-heading', "'Orbitron', 'Rajdhani', sans-serif");
+    this.setCSSVariable('--font-heading', "'Exo 2', 'Rajdhani', sans-serif");
     
     // Set default font sizes
     this.setCSSVariable('--font-size-body', '16px');
