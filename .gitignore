@@ -9,6 +9,7 @@ build/
 assets/videos/battlebeast.mp4
 assets/videos/markvariants.mp4
 assets/videos/omniman.mp4
+assets/
 
 # Environment variables
 .env
