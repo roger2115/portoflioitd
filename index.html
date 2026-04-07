@@ -41,7 +41,19 @@
     </button>
   </div>
 
-  <a href="#main" class="skip-link">Przejdź do głównej treści</a>
+  <!-- Mobile block screen -->
+  <div id="mobile-block" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0a0a0f; z-index:99999; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2rem; font-family:'Rajdhani',sans-serif;">
+    <div style="font-size:4rem; margin-bottom:1rem;">📵</div>
+    <h1 style="color:#0074ff; font-size:1.8rem; font-weight:900; text-transform:uppercase; letter-spacing:0.1em; text-shadow:0 0 20px #0074ff; margin-bottom:1rem;">Strona niedostępna na telefonie</h1>
+    <p style="color:#e0e0e0; font-size:1.1rem; line-height:1.6; max-width:300px;">Ta strona jest zoptymalizowana tylko pod komputer. Wróć na desktopie!</p>
+    <div style="margin-top:2rem; width:80px; height:3px; background:linear-gradient(90deg,#0074ff,#5d00ff);border-radius:2px;"></div>
+  </div>
+  <script>
+    if (window.innerWidth < 768 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+      document.getElementById('mobile-block').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  </script>
   
   <!-- Canvas for particle effects -->
   <canvas id="particle-canvas" aria-hidden="true"></canvas>
