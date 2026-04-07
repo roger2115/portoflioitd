@@ -1,0 +1,710 @@
+/* Performance Optimizations - Overrides for better performance */
+
+/* Disable expensive animations on low-end devices */
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* Optimize will-change usage */
+.hero-visual,
+.gallery-item,
+.skill-card,
+.anime-card {
+  will-change: auto;
+}
+
+.hero-visual:hover,
+.gallery-item:hover,
+.skill-card:hover,
+.anime-card:hover {
+  will-change: transform;
+}
+
+/* Reduce box-shadow complexity */
+.anime-rating-card,
+.skill-card,
+.gallery-item,
+.contact-item {
+  box-shadow: 0 5px 15px rgba(0, 116, 255, 0.3);
+}
+
+.anime-rating-card:hover,
+.skill-card:hover,
+.gallery-item:hover,
+.contact-item:hover {
+  box-shadow: 0 10px 30px rgba(0, 116, 255, 0.5);
+}
+
+/* Simplify text-shadow */
+h1, h2, h3, .section-title, .hero-title {
+  text-shadow: 0 0 10px var(--color-neon-glow);
+}
+
+/* Disable floating animations on mobile */
+@media (max-width: 767px) {
+  .anime-scene,
+  .global-scene,
+  .shape,
+  .floating-shapes {
+    animation: none !important;
+    display: none !important;
+  }
+  
+  .cyber-grid {
+    opacity: 0.1;
+  }
+  
+  #particle-canvas {
+    display: none !important;
+  }
+}
+
+/* Optimize backdrop-filter */
+nav {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* Use transform instead of position for animations */
+.gallery-item-overlay {
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.gallery-item:hover .gallery-item-overlay {
+  transform: translateY(0);
+}
+
+/* Reduce animation complexity */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optimize video rendering */
+video {
+  will-change: auto;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Reduce glow effects */
+.btn-primary,
+.filter-btn.active {
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+.btn-primary:hover,
+.filter-btn:hover {
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
+}
+
+/* Optimize image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Reduce complexity of gradients */
+.loading-bar,
+.skill-progress {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+/* Simplify border animations */
+.anime-rating-card::after,
+.skill-card::after {
+  display: none;
+}
+
+/* Optimize scroll performance */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Reduce paint areas */
+.section {
+  contain: layout style paint;
+}
+
+/* Optimize font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
+
+/* Disable expensive filters on mobile */
+@media (max-width: 767px) {
+  .anime-scene,
+  .global-scene,
+  .skill-icon,
+  .contact-icon {
+    filter: none !important;
+  }
+}
+
+/* Optimize transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reduce animation iterations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Optimize hover states */
+.nav-link:hover,
+.btn:hover,
+.filter-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Disable complex animations on low-end devices */
+@media (max-width: 1023px) {
+  .anime-showcase,
+  .neon-box,
+  .profile-ring,
+  .loading-circle::before {
+    animation: none !important;
+  }
+}
+
+/* Optimize bloody theme */
+body.bloody-theme .anime-rating-card,
+body.bloody-theme .skill-card,
+body.bloody-theme .gallery-item {
+  box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+}
+
+body.bloody-theme .anime-rating-card:hover,
+body.bloody-theme .skill-card:hover,
+body.bloody-theme .gallery-item:hover {
+  box-shadow: 0 10px 40px rgba(255, 0, 0, 0.6);
+}
+
+/* Reduce text-shadow complexity in bloody theme */
+body.bloody-theme .section-title,
+body.bloody-theme .hero-title {
+  text-shadow: 0 0 15px #ff0000;
+}
+
+/* Optimize loading screen */
+.loading-screen {
+  will-change: opacity;
+}
+
+.loading-screen.hidden {
+  will-change: auto;
+}
+
+/* Reduce GPU usage */
+.anime-card,
+.gallery-item,
+.skill-card {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Optimize lightbox */
+.lightbox {
+  will-change: opacity;
+}
+
+.lightbox.active {
+  will-change: auto;
+}
+
+/* Simplify shimmer effects */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Reduce animation complexity for cards */
+.popup-card {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* Optimize ghost assistant */
+#ghost-assistant {
+  will-change: transform;
+}
+
+/* Reduce complexity of glitch effects */
+@keyframes glitch {
+  0%, 95%, 100% {
+    transform: translate(0);
+  }
+  97% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+/* Optimize button glow */
+.btn-glow {
+  transition: width 0.4s, height 0.4s;
+}
+
+/* Reduce star animation complexity */
+.star {
+  animation: none;
+}
+
+.star.filled {
+  color: #ffd700;
+  text-shadow: 0 0 5px #ffd700;
+}
+
+/* Optimize progress bars */
+.skill-progress::after {
+  animation: progressShine 3s infinite;
+}
+
+/* Simplify card float animations */
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Reduce complexity of rotating elements */
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+}
+
+/* Optimize scene animations */
+@keyframes floatScene {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, -20px);
+  }
+}
+
+/* Reduce icon animation complexity */
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Optimize arrow pulse */
+@keyframes arrowPulse {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+/* Simplify title float */
+@keyframes titleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Reduce complexity of bracket blink */
+@keyframes bracketBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Optimize gallery float */
+@keyframes galleryFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Simplify hero glow */
+@keyframes heroGlow {
+  0%, 100% {
+    text-shadow: 0 0 15px var(--color-neon-glow);
+  }
+  50% {
+    text-shadow: 0 0 25px var(--color-neon-glow);
+  }
+}
+
+/* Optimize button glow animation */
+@keyframes btnGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
+  }
+}
+
+/* Reduce neon pulse complexity */
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--color-primary);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--color-primary);
+  }
+}
+
+/* Optimize showcase pulse */
+@keyframes showcasePulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(0, 243, 255, 0.6);
+  }
+}
+
+/* Simplify loading animations */
+@keyframes loadingProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Optimize profile float */
+@keyframes profileFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Reduce ring rotation speed */
+@keyframes ringRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optimize icon float */
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Simplify title pulse */
+@keyframes titlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Optimize freaky bounce */
+@keyframes freakyBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Reduce star float complexity */
+@keyframes starFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Optimize image pulse */
+@keyframes imagePulse {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(0, 243, 255, 0.6);
+  }
+}
+
+/* Simplify overlay pulse */
+@keyframes overlayPulse {
+  0%, 100% {
+    background: rgba(0, 0, 0, 0.95);
+  }
+  50% {
+    background: rgba(0, 0, 0, 0.97);
+  }
+}
+
+/* Optimize content zoom */
+@keyframes contentZoom {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Reduce footer line animation */
+@keyframes footerLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Optimize lightbox fade in */
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Simplify progress glow */
+@keyframes progressGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px var(--color-primary);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--color-primary);
+  }
+}
+
+/* Optimize progress shine */
+@keyframes progressShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Reduce gradient shift complexity */
+@keyframes gradientShift {
+  0%, 100% {
+    transform: translateX(-50%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+}
+
+/* Optimize list item slide */
+@keyframes listItemSlide {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Simplify progress load */
+@keyframes progressLoad {
+  from {
+    width: 0;
+  }
+}
+
+/* Optimize box float */
+@keyframes boxFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Reduce char float complexity */
+@keyframes charFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Optimize pop in animation */
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Simplify circle shimmer */
+@keyframes circleShimmer {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optimize float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Reduce glitch loading complexity */
+@keyframes glitchLoading {
+  0%, 97%, 100% {
+    transform: translate(0);
+  }
+  98% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+/* Optimize nav slide down */
+@keyframes navSlideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Simplify logo glow */
+@keyframes logoGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--color-neon-glow);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--color-neon-glow);
+  }
+}
+
+/* Optimize blink animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Reduce icon spin complexity - disabled by default */
+@keyframes iconSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optimize icon pulse */
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Simplify shimmer sweep */
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* Optimize glitch pulse */
+@keyframes glitchPulse {
+  0%, 95%, 100% {
+    box-shadow: 0 0 8px var(--color-primary);
+  }
+  97% {
+    box-shadow: 0 0 20px var(--color-primary);
+  }
+}
+
+/* Reduce constant glitch complexity */
+@keyframes constantGlitch {
+  0%, 100% {
+    text-shadow: 0 0 5px var(--color-primary);
+  }
+  50% {
+    text-shadow: -1px 0 5px #ff00ff, 1px 0 5px #00ffff;
+  }
+}
