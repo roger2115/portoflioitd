@@ -407,16 +407,37 @@ function initGhostAssistant(): void {
   let dx = 0.6;
   let dy = 0.4;
   let isOpen = false;
+  let isDragging = false;
+  let dragOffX = 0;
+  let dragOffY = 0;
+  let velX = 0;
+  let velY = 0;
+  let lastX = 0;
+  let lastY = 0;
 
   function wander(): void {
-    if (isOpen) { requestAnimationFrame(wander); return; }
-    x += dx; y += dy;
-    const maxX = window.innerWidth - 80;
-    const maxY = window.innerHeight - 80;
-    if (x <= 0 || x >= maxX) dx = -dx;
-    if (y <= 0 || y >= maxY) dy = -dy;
-    x = Math.max(0, Math.min(maxX, x));
-    y = Math.max(0, Math.min(maxY, y));
+    if (isOpen || isDragging) { requestAnimationFrame(wander); return; }
+    // Po rzuceniu - kontynuuj z prędkością
+    if (Math.abs(velX) > 0.1 || Math.abs(velY) > 0.1) {
+      x += velX; y += velY;
+      velX *= 0.97; velY *= 0.97;
+      const maxX = window.innerWidth - 80;
+      const maxY = window.innerHeight - 80;
+      if (x <= 0 || x >= maxX) { velX = -velX; dx = velX; }
+      if (y <= 0 || y >= maxY) { velY = -velY; dy = velY; }
+      x = Math.max(0, Math.min(maxX, x));
+      y = Math.max(0, Math.min(maxY, y));
+    } else {
+      // Normalny wander
+      velX = 0; velY = 0;
+      x += dx; y += dy;
+      const maxX = window.innerWidth - 80;
+      const maxY = window.innerHeight - 80;
+      if (x <= 0 || x >= maxX) dx = -dx;
+      if (y <= 0 || y >= maxY) dy = -dy;
+      x = Math.max(0, Math.min(maxX, x));
+      y = Math.max(0, Math.min(maxY, y));
+    }
     g.style.left = x + 'px';
     g.style.bottom = 'auto';
     g.style.top = y + 'px';
@@ -424,10 +445,45 @@ function initGhostAssistant(): void {
   }
   wander();
 
-  ghostImg.addEventListener('click', () => {
-    isOpen = !isOpen;
-    chat.classList.toggle('open', isOpen);
-    if (isOpen) input.focus();
+  // Drag & throw
+  ghostImg.addEventListener('mousedown', (e: MouseEvent) => {
+    if (e.button !== 0) return;
+    isDragging = true;
+    dragOffX = e.clientX - x;
+    dragOffY = e.clientY - y;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    velX = 0; velY = 0;
+    ghostImg.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', (e: MouseEvent) => {
+    if (!isDragging) return;
+    velX = e.clientX - lastX;
+    velY = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    x = e.clientX - dragOffX;
+    y = e.clientY - dragOffY;
+    g.style.left = x + 'px';
+    g.style.top = y + 'px';
+  });
+
+  document.addEventListener('mouseup', (e: MouseEvent) => {
+    if (!isDragging) return;
+    isDragging = false;
+    ghostImg.style.cursor = 'pointer';
+    // Rzut - zachowaj prędkość
+    dx = velX * 0.3 || 0.6;
+    dy = velY * 0.3 || 0.4;
+    // Kliknięcie bez przeciągania = otwórz chat
+    if (Math.abs(velX) < 2 && Math.abs(velY) < 2) {
+      isOpen = !isOpen;
+      chat.classList.toggle('open', isOpen);
+      if (isOpen) input.focus();
+    }
+    e.preventDefault();
   });
 
   closeBtn.addEventListener('click', () => {
