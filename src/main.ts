@@ -325,9 +325,10 @@ function initLoadingScreen() {
     
     if (bounced) {
       colorIndex = (colorIndex + 1) % colors.length;
-      btn.style.borderColor = colors[colorIndex];
-      btn.style.boxShadow = `0 0 20px ${colors[colorIndex]}`;
-      btn.style.color = colors[colorIndex];
+      const c = colors[colorIndex] ?? '#ff0000';
+      btn.style.borderColor = c;
+      btn.style.boxShadow = `0 0 20px ${c}`;
+      btn.style.color = c;
     }
     
     btn.style.left = x + 'px';
