@@ -64,10 +64,8 @@ body {
 /* Smooth section transitions */
 .section {
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity, transform;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .section.visible {
@@ -451,7 +449,7 @@ body {
   overflow: hidden;
   border: 3px solid var(--color-primary);
   box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
-  animation: showcasePulse 3s ease-in-out infinite;
+  animation: showcasePulse 6s ease-in-out infinite;
 }
 
 @keyframes showcasePulse {
@@ -926,7 +924,7 @@ body {
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.2);
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-  animation: starFloat 3s ease-in-out infinite;
+  animation: starFloat 6s ease-in-out infinite;
 }
 
 .star.filled {
@@ -1435,7 +1433,7 @@ nav {
   font-weight: 900;
   color: var(--color-primary);
   text-shadow: 0 0 15px var(--color-neon-glow);
-  animation: logoGlow 2s ease-in-out infinite;
+  animation: logoGlow 4s ease-in-out infinite;
 }
 
 @keyframes logoGlow {
@@ -1685,7 +1683,7 @@ main {
   background: var(--color-primary);
   border-color: var(--color-primary);
   box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
-  animation: btnGlow 2s ease-in-out infinite;
+  animation: btnGlow 4s ease-in-out infinite;
 }
 
 @keyframes btnGlow {
@@ -1810,7 +1808,7 @@ main {
   text-align: center;
   margin-bottom: var(--spacing-2xl);
   font-size: clamp(2.5rem, 5vw, 4rem);
-  animation: titleFloat 3s ease-in-out infinite;
+  animation: titleFloat 6s ease-in-out infinite;
   color: var(--color-primary);
 }
 
@@ -1860,7 +1858,7 @@ main {
   transition: all var(--duration-normal) var(--easing);
   position: relative;
   overflow: hidden;
-  animation: cardFloat 3s ease-in-out infinite;
+  animation: cardFloat 8s ease-in-out infinite;
   min-height: 400px;
   display: flex;
   flex-direction: column;
@@ -1922,8 +1920,8 @@ main {
 .skill-icon {
   font-size: 3rem;
   margin-bottom: var(--spacing-md);
+  /* iconSpin usunięty - zbyt ciężki dla GPU */
   filter: drop-shadow(0 0 10px var(--color-primary));
-  animation: iconSpin 10s linear infinite, iconPulse 2s ease-in-out infinite;
   display: inline-block;
 }
 
@@ -2107,7 +2105,7 @@ main {
   transition: transform var(--duration-fast) var(--easing);
   border: 2px solid var(--color-primary);
   aspect-ratio: 16 / 9;
-  animation: galleryFloat 4s ease-in-out infinite;
+  animation: galleryFloat 10s ease-in-out infinite;
 }
 
 .gallery-item:nth-child(1) { animation-delay: 0s; }
@@ -3546,4 +3544,154 @@ body.bloody-theme #particle-canvas {
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
   font-weight: 700;
+}
+
+/* === GHOST AI ASSISTANT === */
+.ghost-assistant {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 1000;
+  display: block;
+}
+
+body.bloody-theme .ghost-assistant {
+  display: none !important;
+}
+
+.ghost-img {
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  animation: ghostFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(0, 116, 255, 0.6));
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+}
+
+.ghost-img:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 20px rgba(0, 116, 255, 0.9));
+}
+
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.ghost-chat {
+  display: none;
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 300px;
+  background: rgba(10, 10, 20, 0.97);
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 116, 255, 0.4);
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease;
+}
+
+.ghost-chat.open {
+  display: flex;
+  flex-direction: column;
+}
+
+.ghost-chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 116, 255, 0.2);
+  border-bottom: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.ghost-close {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+}
+
+.ghost-messages {
+  padding: 0.75rem;
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ghost-msg {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  max-width: 85%;
+}
+
+.ghost-msg-bot {
+  background: rgba(0, 116, 255, 0.15);
+  border: 1px solid rgba(0, 116, 255, 0.3);
+  color: #e0e0e0;
+  align-self: flex-start;
+}
+
+.ghost-msg-user {
+  background: rgba(93, 0, 255, 0.2);
+  border: 1px solid rgba(93, 0, 255, 0.4);
+  color: #e0e0e0;
+  align-self: flex-end;
+}
+
+.ghost-msg-typing {
+  color: rgba(224, 224, 224, 0.5);
+  font-style: italic;
+}
+
+.ghost-input-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid rgba(0, 116, 255, 0.2);
+}
+
+.ghost-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 116, 255, 0.4);
+  border-radius: 6px;
+  color: #e0e0e0;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  outline: none;
+}
+
+.ghost-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 8px rgba(0, 116, 255, 0.3);
+}
+
+.ghost-send {
+  background: var(--color-primary);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.ghost-send:hover {
+  background: var(--color-secondary);
 }

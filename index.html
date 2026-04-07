@@ -71,29 +71,17 @@
     <div class="shape shape-6"></div>
   </div>
   
-  <!-- Global Anime Scenes Background -->
+  <!-- Global Anime Scenes Background - 2 elementy dla wydajności -->
   <div class="global-anime-scenes" aria-hidden="true">
     <div class="global-scene" style="animation-delay: 0s;">
       <video autoplay muted loop playsinline preload="none">
         <source src="/assets/videos/zerotwo.mp4" type="video/mp4">
       </video>
     </div>
-    <div class="global-scene" style="animation-delay: 3s;">
+    <div class="global-scene" style="animation-delay: 5s;">
       <video autoplay muted loop playsinline preload="none">
         <source src="/assets/videos/deathnote.mp4" type="video/mp4">
       </video>
-    </div>
-    <div class="global-scene" style="animation-delay: 6s;">
-      <img src="https://media.tenor.com/Hs8T9Wd8WFMAAAAC/tokyo-ghoul-kaneki.gif" loading="lazy" alt="Tokyo Ghoul">
-    </div>
-    <div class="global-scene" style="animation-delay: 9s;">
-      <img src="https://media.tenor.com/8kGqF5qJxGMAAAAC/castlevania-alucard.gif" loading="lazy" alt="Castlevania">
-    </div>
-    <div class="global-scene" style="animation-delay: 12s;">
-      <img src="https://media.tenor.com/FW8gPGTByV8AAAAC/darling-in-the-franxx-zero-two.gif" loading="lazy" alt="Darling in the Franxx">
-    </div>
-    <div class="global-scene" style="animation-delay: 15s;">
-      <img src="https://media.tenor.com/qkWNE_or_UIAAAAC/death-note-light-yagami.gif" loading="lazy" alt="Death Note">
     </div>
   </div>
   
@@ -214,28 +202,10 @@
             <source src="/assets/videos/zerotwo.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="anime-scene" style="animation-delay: 2s;">
+        <div class="anime-scene" style="animation-delay: 5s;">
           <video autoplay muted loop playsinline preload="none">
             <source src="/assets/videos/deathnote.mp4" type="video/mp4">
           </video>
-        </div>
-        <div class="anime-scene" style="animation-delay: 4s;">
-          <img src="https://media.tenor.com/Hs8T9Wd8WFMAAAAC/tokyo-ghoul-kaneki.gif" loading="lazy" alt="Tokyo Ghoul">
-        </div>
-        <div class="anime-scene" style="animation-delay: 6s;">
-          <img src="https://media.tenor.com/8kGqF5qJxGMAAAAC/castlevania-alucard.gif" loading="lazy" alt="Castlevania">
-        </div>
-        <div class="anime-scene" style="animation-delay: 8s;">
-          <img src="https://media.tenor.com/FW8gPGTByV8AAAAC/darling-in-the-franxx-zero-two.gif" loading="lazy" alt="Darling in the Franxx">
-        </div>
-        <div class="anime-scene" style="animation-delay: 10s;">
-          <img src="https://media.tenor.com/qkWNE_or_UIAAAAC/death-note-light-yagami.gif" loading="lazy" alt="Death Note">
-        </div>
-        <div class="anime-scene" style="animation-delay: 12s;">
-          <img src="https://media.tenor.com/rH-h28kBhPQAAAAi/freaky-cat.gif" loading="lazy" alt="Freaky Cat">
-        </div>
-        <div class="anime-scene" style="animation-delay: 14s;">
-          <img src="https://media.tenor.com/FW8gPGTByV8AAAAC/darling-in-the-franxx-zero-two.gif" loading="lazy" alt="Zero Two">
         </div>
       </div>
       
@@ -756,6 +726,24 @@
       <p>&copy; <span id="copyright-year"></span> Roger. Zrobione dla zabawy.</p>
     </div>
   </footer>
+
+  <!-- Ghost AI Assistant - tylko w niebieskim motywie -->
+  <div id="ghost-assistant" class="ghost-assistant">
+    <img src="/Duch.png" alt="Duszek" class="ghost-img" id="ghost-img">
+    <div class="ghost-chat" id="ghost-chat">
+      <div class="ghost-chat-header">
+        <span>👻 Duszek</span>
+        <button class="ghost-close" id="ghost-close">✕</button>
+      </div>
+      <div class="ghost-messages" id="ghost-messages">
+        <div class="ghost-msg ghost-msg-bot">Hej! Jestem duszkiem tej strony 👻 Zapytaj mnie o cokolwiek!</div>
+      </div>
+      <div class="ghost-input-row">
+        <input type="text" id="ghost-input" class="ghost-input" placeholder="Napisz coś...">
+        <button id="ghost-send" class="ghost-send">➤</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>

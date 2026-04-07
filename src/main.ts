@@ -386,3 +386,114 @@ if (document.readyState === 'loading') {
   initLoadingScreen();
   init();
 }
+
+// Ghost AI Assistant
+function initGhostAssistant(): void {
+  const ghost = document.getElementById('ghost-assistant');
+  const ghostImg = document.getElementById('ghost-img');
+  const chat = document.getElementById('ghost-chat');
+  const closeBtn = document.getElementById('ghost-close');
+  const input = document.getElementById('ghost-input') as HTMLInputElement;
+  const sendBtn = document.getElementById('ghost-send');
+  const messages = document.getElementById('ghost-messages');
+
+  if (!ghost || !ghostImg || !chat || !closeBtn || !input || !sendBtn || !messages) return;
+
+  const msgs = messages as HTMLElement;
+  const g = ghost as HTMLElement;
+
+  // DVD-style wandering
+  let x = 32;
+  let y = window.innerHeight - 100;
+  let dx = 0.6;
+  let dy = 0.4;
+  let isOpen = false;
+  let _animId: number;
+
+  function wander(): void {
+    if (isOpen) { _animId = requestAnimationFrame(wander); return; }
+    x += dx;
+    y += dy;
+    const maxX = window.innerWidth - 80;
+    const maxY = window.innerHeight - 80;
+    if (x <= 0 || x >= maxX) dx = -dx;
+    if (y <= 0 || y >= maxY) dy = -dy;
+    x = Math.max(0, Math.min(maxX, x));
+    y = Math.max(0, Math.min(maxY, y));
+    g.style.left = x + 'px';
+    g.style.bottom = 'auto';
+    g.style.top = y + 'px';
+    _animId = requestAnimationFrame(wander);
+  }
+  wander();
+
+  ghostImg.addEventListener('click', () => {
+    isOpen = !isOpen;
+    chat.classList.toggle('open', isOpen);
+    if (isOpen) input.focus();
+  });
+
+  closeBtn.addEventListener('click', () => {
+    isOpen = false;
+    chat.classList.remove('open');
+  });
+
+  const responses: Record<string, string> = {
+    'kim jesteś': 'Jestem duszkiem tej strony! 👻 Strzegę portfolio ten_rogera.',
+    'kto to roger': 'Roger to wizjoner, filantrop, gracz i uczeń. Twórca tej strony!',
+    'co tu jest': 'To portfolio ten_rogera - znajdziesz tu projekty, ulubione anime i kontakt.',
+    'anime': 'Roger lubi Darling in the FRANXX, Death Note, Solo Leveling i wiele innych!',
+    'projekty': 'Sprawdź sekcję Projekty - są tam strony o transporcie kolejowym, biotechnologii i Fibonaccim.',
+    'kontakt': 'Napisz na totenroger2115@gmail.com albo znajdź go na GitHubie jako roger2115.',
+    'discord': 'Jego Discord to ten_roger.',
+    'github': 'github.com/roger2115',
+    'muzyka': 'Roger słucha Chivasa i innych artystów - sprawdź widget Spotify na stronie!',
+    'steam': 'Jego profil Steam to ten_roger - gra w różne gry.',
+    'cześć': 'Cześć! 👋 Jak mogę pomóc?',
+    'hej': 'Hej! 👻 O co chcesz zapytać?',
+    'siema': 'Siema! Pytaj śmiało!',
+    'dzięki': 'Nie ma za co! 😄',
+    'pa': 'Pa pa! 👻',
+  };
+
+  function addMsg(text: string, isUser: boolean): void {
+    const div = document.createElement('div');
+    div.className = `ghost-msg ${isUser ? 'ghost-msg-user' : 'ghost-msg-bot'}`;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function getResponse(q: string): string {
+    const lower = q.toLowerCase().trim();
+    for (const [key, val] of Object.entries(responses)) {
+      if (lower.includes(key)) return val;
+    }
+    return 'Hmm, nie wiem 🤔 Spróbuj zapytać o Rogera, projekty, anime, kontakt lub Steam!';
+  }
+
+  function handleSend(): void {
+    const text = input.value.trim();
+    if (!text) return;
+    addMsg(text, true);
+    input.value = '';
+    const typing = document.createElement('div');
+    typing.className = 'ghost-msg ghost-msg-bot ghost-msg-typing';
+    typing.textContent = '...';
+    msgs.appendChild(typing);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => {
+      typing.remove();
+      addMsg(getResponse(text), false);
+    }, 600);
+  }
+
+  sendBtn.addEventListener('click', handleSend);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSend(); });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGhostAssistant);
+} else {
+  initGhostAssistant();
+}
