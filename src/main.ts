@@ -509,54 +509,42 @@ function initGhostAssistant(): void {
   async function getAIResponse(userMsg: string): Promise<string> {
     history.push({ role: 'user', content: userMsg });
     try {
-      // Używamy darmowego API Hugging Face - bez klucza!
-      const systemPrompt = 'Jesteś Beebub - przyjazny duszek asystent na portfolio stronie ten_rogera. Odpowiadasz po polsku, krótko i z humorem. Wiesz że ta strona należy do Rogera - gracza, który lubi anime (Darling in the FRANXX, Death Note, Solo Leveling), programuje dla zabawy i jest uczniem. Jego kontakt: totenroger2115@gmail.com, github: roger2115, discord: ten_roger.';
+      // Używamy prostego fallback - odpowiedzi z lokalnej bazy
+      const responses: Record<string, string[]> = {
+        'hej': ['Hej! 👻 Jestem Beebub, duszek Rogera!', 'Cześć! 👻 Co u Ciebie?', 'Siema! 👻'],
+        'kim jesteś': ['Jestem Beebub 👻 - duszek asystent na stronie Rogera!', 'Beebub do usług! 👻 Pomagam Rogerowi na tej stronie.'],
+        'roger': ['Roger to mój szef! 👻 Lubi anime, gry i programowanie dla zabawy.', 'Roger jest cool! 👻 Uczeń, gracz, fan anime.'],
+        'anime': ['Roger lubi Darling in the FRANXX, Death Note i Solo Leveling! 👻', 'Zero Two best girl! 👻'],
+        'kontakt': ['Email: totenroger2115@gmail.com 📧\nGitHub: roger2115 💻\nDiscord: ten_roger 🎮', 'Możesz napisać do Rogera: totenroger2115@gmail.com 👻'],
+        'projekty': ['Sprawdź sekcję "Moje Projekty" wyżej! 👻 Roger zrobił kilka fajnych rzeczy.', 'Roger ma projekty o pociągach, biotechnologii i Fibonaccim! 👻'],
+        'default': [
+          'Hmm, ciekawe pytanie! 👻',
+          'Nie jestem pewien, ale Roger na pewno by wiedział! 👻',
+          'To wykracza poza moją wiedzę duszka 👻',
+          'Spróbuj zapytać o Rogera, jego projekty lub anime! 👻',
+          'Jestem prostym duszkiem, ale mogę Ci powiedzieć o Rogerze! 👻'
+        ]
+      };
+
+      // Znajdź najlepsze dopasowanie
+      const lowerMsg = userMsg.toLowerCase();
+      let matchedKey = 'default';
       
-      // Budujemy prompt z historią
-      let fullPrompt = systemPrompt + '\n\n';
-      history.forEach(msg => {
-        fullPrompt += `${msg.role === 'user' ? 'Użytkownik' : 'Beebub'}: ${msg.content}\n`;
-      });
-      fullPrompt += 'Beebub:';
-      
-      const res = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          inputs: fullPrompt,
-          parameters: {
-            max_new_tokens: 150,
-            temperature: 0.7,
-            top_p: 0.9,
-            return_full_text: false
-          }
-        })
-      });
-      
-      if (!res.ok) {
-        const err = await res.text();
-        console.error('Hugging Face error:', res.status, err);
-        return `Błąd API (${res.status}) 👻 Spróbuj za chwilę!`;
+      for (const key in responses) {
+        if (lowerMsg.includes(key)) {
+          matchedKey = key;
+          break;
+        }
       }
-      
-      const data = await res.json() as Array<{ generated_text?: string }>;
-      let reply = data[0]?.generated_text?.trim() ?? 'Ups, brak odpowiedzi 👻';
-      
-      // Wyczyść odpowiedź z promptu jeśli został
-      reply = reply.replace(/^Beebub:\s*/i, '').trim();
-      
-      // Ogranicz długość
-      if (reply.length > 300) {
-        reply = reply.substring(0, 297) + '...';
-      }
+
+      const possibleResponses = responses[matchedKey] || responses['default'];
+      const reply = possibleResponses[Math.floor(Math.random() * possibleResponses.length)] || 'Hej! 👻';
       
       history.push({ role: 'assistant', content: reply });
       return reply;
     } catch (e) {
-      console.error('Fetch error:', e);
-      return 'Nie mogę się połączyć 👻 Spróbuj później!';
+      console.error('Error:', e);
+      return 'Ups, coś poszło nie tak! 👻';
     }
   }
 
