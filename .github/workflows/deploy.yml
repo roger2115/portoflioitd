@@ -36,12 +36,6 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Replace API keys
-        run: |
-          chmod +x scripts/replace-api-key.sh
-          ./scripts/replace-api-key.sh "${{ secrets.OPENROUTER_API_KEY }}"
-        shell: bash
-
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
