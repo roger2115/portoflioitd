@@ -538,6 +538,9 @@ function initGhostAssistant(): void {
       }
 
       const possibleResponses = responses[matchedKey] || responses['default'];
+      if (!possibleResponses) {
+        return 'Hej! 👻';
+      }
       const reply = possibleResponses[Math.floor(Math.random() * possibleResponses.length)] || 'Hej! 👻';
       
       history.push({ role: 'assistant', content: reply });
